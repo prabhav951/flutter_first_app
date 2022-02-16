@@ -5,15 +5,30 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  @override
+ @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Text('Hello'),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('My First App'),
+        ),
+        body: Text('This is my default'),
+      ),
+        // Creates a base page design and structure for the app
     );
   }
 }
 
 /*
+
+
+Different types of widgets
+  Output and input(visible) - RaisedButton, Text(), Card()
+  Layout and Control(invisible) - Row(), Column(), ListView()
+    Give structure to app
+
+  Container() - acts sometimes as visible and invisible widget.
+
 Named arguments are defined by enclosing those in {}.
   class Person {}
     String name;
