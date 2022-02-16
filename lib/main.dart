@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import './question.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -7,7 +9,6 @@ void main() {
 class MyApp extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return _MyAppState();
   }
 }
@@ -37,7 +38,9 @@ class _MyAppState extends State<MyApp> {
         ),
         body: Column(
           children: [
-            Text(questions[_questionIndex]),
+            Question(
+              questions[_questionIndex],
+            ),
             ElevatedButton(
               child: Text('Answer 1'),
               onPressed: _answerQuestion,
@@ -88,26 +91,41 @@ Different types of widgets
 
   Container() - acts sometimes as visible and invisible widget.
 
-Named arguments are defined by enclosing those in {}.
-  class Person {}
-    String name;
-    int age;
-    Person({String inputName, age = 30}) {
-      name = inputName;
-      this.age = age;
+Class
+  Named arguments are defined by enclosing those in {}.
+    class Person {}
+      String name;
+      int age;
+      Person({String inputName, age = 30}) {
+        name = inputName;
+        this.age = age;
+      }
     }
-  }
 
-They are optional by default but can be made compuslory by using @required annotation
-THIS IS NOT A DART FUNCTIONALITY, but of the flutter framework
-  Person({@required String inputName, @required age = 30}) {
-    ...
-  }
+  They are optional by default but can be made compuslory by using @required annotation
+  THIS IS NOT A DART FUNCTIONALITY, but of the flutter framework
+    Person({@required String inputName, @required age = 30}) {
+      ...
+    }
 
-A shorter way to define a constructor. The arugument values are directly assigned into the data members.
-  Person({this.name, this.age = 30});
+  A shorter way to define a constructor. The arugument values are directly assigned into the data members.
+    Person({this.name, this.age = 30});
 
-@override
-  We want to override the method of the parent.
+  @override
+    We want to override the method of the parent.
+
+  Multiple Constructors
+      class Person {}
+      String name;
+      int age;
+      Person({String inputName, age = 30}) {
+        name = inputName;
+        this.age = age;
+      }
+
+      Person.veryOld(String inputName) {
+        this.age = 60;
+      }
+    }
 
 */
