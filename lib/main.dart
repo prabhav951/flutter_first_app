@@ -4,14 +4,24 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return _MyAppState();
+  }
+}
+
+class _MyAppState extends State<MyApp> {
   // Trying to implement state
   // But it is not possible in a Stateless Widget
-  var questionIndex = 0;
+  var _questionIndex = 0;
 
-  void answerQuestion() {
-    questionIndex++;
-    print(questionIndex);
+  void _answerQuestion() {
+    setState(() {
+      _questionIndex++;
+    });
+    print(_questionIndex);
   }
 
   @override
@@ -27,10 +37,10 @@ class MyApp extends StatelessWidget {
         ),
         body: Column(
           children: [
-            Text(questions[questionIndex]),
+            Text(questions[_questionIndex]),
             ElevatedButton(
               child: Text('Answer 1'),
-              onPressed: answerQuestion,
+              onPressed: _answerQuestion,
             ),
             ElevatedButton(
               child: Text('Answer 2'),
@@ -55,7 +65,21 @@ class MyApp extends StatelessWidget {
 }
 
 /*
+_ infront of classes indicates that these cannot be used in other files.
+_ infront of members indicates private access within file/other files.
 
+Stateful Widget
+  It can be created when external data changes.
+  The State subclass is not recreated in order for the state to be peristant
+  setState() recalls the build method again
+
+State is Data/Info used by the App
+  Stateless widget
+    Text()
+    widget is once made and internal data is never changed.
+    If input data to Text() changes, whole widget is rebuilt
+  Stateful
+    Can have a state
 
 Different types of widgets
   Output and input(visible) - RaisedButton, Text(), Card()
