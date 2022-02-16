@@ -5,12 +5,21 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  // Trying to implement state
+  // But it is not possible in a Stateless Widget
+  var questionIndex = 0;
+
   void answerQuestion() {
-    print('Answer chosen');
+    questionIndex++;
+    print(questionIndex);
   }
 
   @override
   Widget build(BuildContext context) {
+    var questions = [
+      'What is your favourite colour?',
+      'What is your favourite animal'
+    ];
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -18,7 +27,7 @@ class MyApp extends StatelessWidget {
         ),
         body: Column(
           children: [
-            Text('The question!'),
+            Text(questions[questionIndex]),
             ElevatedButton(
               child: Text('Answer 1'),
               onPressed: answerQuestion,
