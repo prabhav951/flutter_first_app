@@ -18,6 +18,35 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   // Trying to implement state
   // But it is not possible in a Stateless Widget
+  final questions = const [
+    {
+      'questionText': 'What is your favourite colour?',
+      'answers': [
+        'Black',
+        'Red',
+        'Green',
+        'White',
+      ],
+    },
+    {
+      'questionText': 'What is your favourite animal',
+      'answers': [
+        'Rabbit',
+        'Snake',
+        'Lion',
+        'Elephant',
+      ],
+    },
+    {
+      'questionText': 'What is your favourite anime',
+      'answers': [
+        'DS',
+        'DS',
+        'DS',
+        'DS',
+      ]
+    },
+  ];
   var _questionIndex = 0;
 
   void _answerQuestion() {
@@ -29,54 +58,26 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    final questions = [
-      {
-        'questionText': 'What is your favourite colour?',
-        'answers': [
-          'Black',
-          'Red',
-          'Green',
-          'White',
-        ],
-      },
-      {
-        'questionText': 'What is your favourite animal',
-        'answers': [
-          'Rabbit',
-          'Snake',
-          'Lion',
-          'Elephant',
-        ],
-      },
-      {
-        'questionText': 'What is your favourite anime',
-        'answers': [
-          'DS',
-          'DS',
-          'DS',
-          'DS',
-        ]
-      },
-    ];
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           title: Text('My First App'),
         ),
-        body: Column(
-          children: [
-            Question(
-              questions[_questionIndex]['questionText'] as String,
-            ),
-            // Answer(_answerQuestion),
-            // Answer(_answerQuestion),
-            // Answer(_answerQuestion),
-            ...(questions[_questionIndex]['answers'] as List<String>)
-                .map((answer) {
-              return Answer(answer, _answerQuestion);
-            }).toList(),
-          ],
-        ),
+        body: _questionIndex < questions.length
+            ? Column(
+                children: [
+                  Question(
+                    questions[_questionIndex]['questionText'] as String,
+                  ),
+                  ...(questions[_questionIndex]['answers'] as List<String>)
+                      .map((answer) {
+                    return Answer(answer, _answerQuestion);
+                  }).toList(),
+                ],
+              )
+            : Center(
+                child: Text('Test Done'),
+              ),
       ),
       // Creates a base page design and structure for the app
     );
@@ -84,6 +85,26 @@ class _MyAppState extends State<MyApp> {
 }
 
 /*
+null
+  Direct comparisons with null is possible, like C/Java
+
+final and const
+  final is used, when you don't want to change the value of variable after first assignment. So initially it need not be initialized.
+    It is runtime constant.
+  const is used for same purpose, but must be initialized too.
+    It is compile time constant.
+
+  if the object is not meant to be changed, also the variable
+    use const for indentifier.
+  if the object only is not meant to be changed, but the variable can.
+    use const for object, and var for identifier
+    Ex:
+      var dummy = const ['Hello'];
+      dummy.add('Bye'); // Gives compile time error as list is unmodifiable.
+  if data is not going to be changed, once initialized later
+    use final for identifier.
+
+
 _ infront of classes indicates that these cannot be used in other files.
 _ infront of members indicates private access within file/other files.
 
