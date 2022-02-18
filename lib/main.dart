@@ -22,34 +22,80 @@ class _MyAppState extends State<MyApp> {
     {
       'questionText': 'What is your favourite colour?',
       'answers': [
-        'Black',
-        'Red',
-        'Green',
-        'White',
+        {
+          'text': 'Black',
+          'score': 10,
+        },
+        {
+          'text': 'Red',
+          'score': 8,
+        },
+        {
+          'text': 'Green',
+          'score': 6,
+        },
+        {
+          'text': 'White',
+          'score': 4,
+        },
       ],
     },
     {
       'questionText': 'What is your favourite animal',
       'answers': [
-        'Rabbit',
-        'Snake',
-        'Lion',
-        'Elephant',
+        {
+          'text': 'Rabbit',
+          'score': 1,
+        },
+        {
+          'text': 'Snake',
+          'score': 10,
+        },
+        {
+          'text': 'Lion',
+          'score': 5,
+        },
+        {
+          'text': 'Elephant',
+          'score': 3,
+        },
       ],
     },
     {
       'questionText': 'What is your favourite anime',
       'answers': [
-        'DS',
-        'DS',
-        'DS',
-        'DS',
+        {
+          'text': 'DS',
+          'score': 1,
+        },
+        {
+          'text': 'DS',
+          'score': 1,
+        },
+        {
+          'text': 'DS',
+          'score': 1,
+        },
+        {
+          'text': 'DS',
+          'score': 10,
+        },
       ]
     },
   ];
   var _questionIndex = 0;
+  var _totalScore = 0;
 
-  void _answerQuestion() {
+  void _resetQuiz() {
+    print('Quiz reset');
+    setState(() {
+      _questionIndex = 0;
+      _totalScore = 0;
+    });
+  }
+
+  void _answerQuestion(int score) {
+    _totalScore += score;
     setState(() {
       _questionIndex++;
     });
@@ -61,7 +107,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('My First App'),
+          title: const Text('My First App'),
         ),
         body: _questionIndex < _questions.length
             ? Quiz(
@@ -69,7 +115,7 @@ class _MyAppState extends State<MyApp> {
                 questionIndex: _questionIndex,
                 questions: _questions,
               )
-            : Result(),
+            : Result(_totalScore, _resetQuiz),
       ),
       // Creates a base page design and structure for the app
     );
@@ -77,6 +123,8 @@ class _MyAppState extends State<MyApp> {
 }
 
 /*
+Column by default takes all height of viewport
+
 null
   Direct comparisons with null is possible, like C/Java
 
